@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'atte_users',
+        'passwords' => 'users',
     ],
 
     /*
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'atte_users',
+            'provider' => 'users',
         ],
     ],
 
@@ -62,7 +62,7 @@ return [
     'providers' => [
         'atte_users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Atte_user::class,
+            'model' => App\Models\User::class,
         ],
 
         // 'users' => [
@@ -88,7 +88,7 @@ return [
 
     'passwords' => [
         'atte_users' => [
-            'provider' => 'atte_users',
+            'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
