@@ -24,6 +24,15 @@ class Attendance extends Model
         return $this->hasMany(BreakTime::class);
     }
 
+    public function getFormattedStartTimeAttribute()
+    {
+        return Carbon::parse($this->start_time)->format('H:i');
+    }
+
+    public function getFormattedEndTimeAttribute()
+    {
+        return $this->end_time ? Carbon::parse($this->end_time)->format('H:i') : '記録なし';
+    }
 
     public function getWorkHoursAttribute()
     {
@@ -39,8 +48,13 @@ class Attendance extends Model
 
         $workMinutes = $end->diffInMinutes($start) - $totalBreakMinutes;
 
-        return round($workMinutes / 60, 2);
+        return $workMinutes;
     }
+
+    // public function getFormattedWorkHoursAttribute()
+    // {
+    //     return Carbon::parse($this->work_hours)->format('H:i');
+    // }
 
     public function getTotalBreakMinutesAttribute()
     {

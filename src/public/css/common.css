@@ -9,6 +9,10 @@ input {
     color: #8B7969;
 }
 
+.start__form {
+        color: #8B7969;
+    }
+
 textarea::placeholder,
 input::placeholder {
     color: #BEB1A6;

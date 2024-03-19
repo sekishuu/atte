@@ -60,7 +60,7 @@ return [
     */
 
     'providers' => [
-        'atte_users' => [
+        'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
@@ -87,7 +87,7 @@ return [
     */
 
     'passwords' => [
-        'atte_users' => [
+        'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,

@@ -41,6 +41,10 @@
                     @enderror
                 </p>
             </div>
+            <div class="register-form__group">
+                <label class="register-form__label" for="password_confirmation">パスワード確認</label>
+                <input class="register-form__input" type="password" name="password_confirmation" id="password_confirmation" placeholder="パスワードを再入力してください">
+            </div>
             <input class="register-form__btn btn" type="submit" value="登録">
         </form>
     </div>

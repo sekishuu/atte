@@ -17,7 +17,12 @@
             <ul class="header__right">
                 <li class="header__right__menu">ホーム</li>
                 <li class="header__right__menu">日付一覧</li>
-                <li class="header__right__menu">ログアウト</li>
+                <li class="header__right__menu">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit">ログアウト</button>
+                    </form>
+                </li>
             </ul>
             @yield('link')
         </header>

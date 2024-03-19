@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\BreakTime;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class AttendanceController extends Controller
 {
@@ -24,18 +23,7 @@ class AttendanceController extends Controller
                // ->where('user_id', $userId)
                ->orderBy('work_date', 'desc')
                ->orderBy('start_time', 'desc')
-               ->get()
-               ->map(function ($attendance) {
-
-                    $attendance->formatted_start_time = Carbon::parse($attendance->start_time)->format('H:i');
-
-
-                    $attendance->formatted_end_time = $attendance->end_time
-                    ? Carbon::parse($attendance->end_time)->format('H:i')
-                    : '記録なし';
-
-                    return $attendance;
-               });
+               ->get();
 
           return view('index', compact('attendances'));
      }
@@ -43,8 +31,7 @@ class AttendanceController extends Controller
      public function startWork(Request $request)
      {
           Attendance::create([
-               // 'user_id' => Auth::id(),
-               'user_id' => 1,
+               'user_id' => Auth::id(),
                'work_date' => now()->toDateString(),
                'start_time' => now(),
           ]);
@@ -55,9 +42,8 @@ class AttendanceController extends Controller
 
      public function endWork(Request $request)
      {
-          // $attendance = Attendance::where('user_id', Auth::id())
-          //      ->whereDate('work_date', now()->toDateString())
-          $attendance = Attendance::whereDate('work_date', now()->toDateString())
+          $attendance = Attendance::where('user_id', Auth::id())
+               ->whereDate('work_date', now()->toDateString())
                ->latest()
                ->first();
 
@@ -74,9 +60,8 @@ class AttendanceController extends Controller
 
      public function startBreak(Request $request)
      {
-          // $attendanceId = Attendance::where('user_id', Auth::id())
-          //      ->whereDate('work_date', now()->toDateString())
-          $attendanceId = Attendance::whereDate('work_date', now()->toDateString())
+          $attendanceId = Attendance::where('user_id', Auth::id())
+               ->whereDate('work_date', now()->toDateString())
                ->latest()
                ->value('id');
 
@@ -96,9 +81,8 @@ class AttendanceController extends Controller
      public function endBreak(Request $request)
      {
           $breakTime = BreakTime::whereHas('attendance', function ($query) {
-               // $query->where('user_id', Auth::id())
-               //      ->whereDate('work_date', now()->toDateString());
-               $query->whereDate('work_date', now()->toDateString());
+               $query->where('user_id', Auth::id())
+                    ->whereDate('work_date', now()->toDateString());
           })
                ->latest()
                ->first();
@@ -107,7 +91,7 @@ class AttendanceController extends Controller
                $breakTime->end_time = now();
                $breakTime->save();
 
-               return redirect('/attendance')->with('success', '休憩終了を記録しました。');
+               return redirect('/')->with('success', '休憩終了を記録しました。');
           }
 
           return redirect('/')->with('error', '休憩開始記録が見つかりません。');
