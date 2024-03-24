@@ -26,43 +26,48 @@ class Attendance extends Model
 
     public function getFormattedStartTimeAttribute()
     {
-        return Carbon::parse($this->start_time)->format('H:i');
+        return Carbon::parse($this->start_time)->format('H:i:s');
     }
 
     public function getFormattedEndTimeAttribute()
     {
-        return $this->end_time ? Carbon::parse($this->end_time)->format('H:i') : '記録なし';
+        return $this->end_time ? Carbon::parse($this->end_time)->format('H:i:s') : '記録なし';
     }
 
     public function getWorkHoursAttribute()
     {
         if (!$this->end_time) {
-            return 0;
+            return "00:00:00";
         }
 
         $start = Carbon::parse($this->start_time);
         $end = Carbon::parse($this->end_time);
-        $totalBreakMinutes = $this->breakTimes->sum(function ($break) {
-            return Carbon::parse($break->end_time)->diffInMinutes(Carbon::parse($break->start_time));
+
+        $totalBreakSeconds = $this->breakTimes->sum(function ($break) {
+            return Carbon::parse($break->end_time)->diffInSeconds(Carbon::parse($break->start_time));
         });
 
-        $workMinutes = $end->diffInMinutes($start) - $totalBreakMinutes;
+        $workSeconds = $end->diffInSeconds($start) - $totalBreakSeconds;
 
-        return $workMinutes;
+    $hours = floor($workSeconds / 3600);
+    $minutes = floor(($workSeconds % 3600) / 60);
+    $seconds = $workSeconds % 60;
+
+    return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
     }
 
-    // public function getFormattedWorkHoursAttribute()
-    // {
-    //     return Carbon::parse($this->work_hours)->format('H:i');
-    // }
-
-    public function getTotalBreakMinutesAttribute()
+    public function getFormattedTotalBreakTimeAttribute()
     {
-        return $this->breakTimes->sum(function ($break) {
+        $totalBreakSeconds = $this->breakTimes->sum(function ($break) {
             if ($break->end_time) {
-                return Carbon::parse($break->end_time)->diffInMinutes(Carbon::parse($break->start_time));
+                return Carbon::parse($break->end_time)->diffInSeconds(Carbon::parse($break->start_time));
             }
             return 0;
         });
+        $hours = floor($totalBreakSeconds / 3600);
+        $minutes = floor(($totalBreakSeconds % 3600) / 60);
+        $seconds = $totalBreakSeconds % 60;
+
+        return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
     }
 }

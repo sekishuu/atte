@@ -7,6 +7,8 @@
 </div>
 @endif
 <div class="container">
+    <div id="clock">現在日時</div>
+    <script src="/js/updateTime.js"></script>
     <h2>勤怠打刻</h2>
     <form class="start__form" action="{{ route('work.start') }}" method="POST">
         @csrf

@@ -18,6 +18,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [AttendanceController::class, 'create'])->name('attendances.create');
     Route::post('/attendances', [AttendanceController::class, 'store'])->name('attendances.store');
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendances.index');
+    Route::get('/attendance/{date}', [AttendanceController::class, 'showByDate'])->name('attendances.show-by-date');
     Route::post('/work/start', [AttendanceController::class, 'startWork'])->name('work.start');
     Route::post('/work/end', [AttendanceController::class, 'endWork'])->name('work.end');
     Route::post('/break/start', [AttendanceController::class, 'startBreak'])->name('break.start');
