@@ -7,6 +7,7 @@
 </div>
 @endif
 <div class="container">
+    <script src="{{ asset('js/app.js') }}"></script>
     <div id="clock">現在日時</div>
     <script src="/js/updateTime.js"></script>
     <h2>勤怠打刻</h2>

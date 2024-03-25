@@ -24,7 +24,7 @@ class AttendanceController extends Controller
                ->where('user_id', $userId)
                ->whereDate('work_date', '=', $selectedDate)
                ->orderBy('start_time', 'desc')
-               ->get();
+               ->paginate(5);
 
           return view('index', compact('attendances', 'selectedDate'));
      }
