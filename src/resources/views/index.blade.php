@@ -2,6 +2,7 @@
 
 @section('content')
 <h2>勤怠記録一覧</h2>
+<p>こんにちは、{{ Auth::user()->name }}さん</p>
 <form action="{{ route('attendances.index') }}" method="GET">
     <input type="date" name="date" value="{{ $selectedDate }}">
     <button type="submit">表示</button>
