@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<p class="show__user_name">こんにちは、{{ Auth::user()->name }}さん</p>
+<p class="show__user_name">こんにちは、{{ Auth::user()->name }}さん【管理者画面】</p>
 <div class="select__date">
     <form class="date__form" action="{{ route('attendances.index') }}" method="GET">
         <input type="date" name="date" value="{{ $selectedDate }}">

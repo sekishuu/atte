@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-<nav>
+<nav class="pagination__position">
     <ul class="pagination">
         {{-- "Previous Page" Link --}}
         <li class="{{ $paginator->onFirstPage() ? 'disabled' : '' }}">

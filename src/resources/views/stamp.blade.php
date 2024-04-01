@@ -6,11 +6,10 @@
     {{ session('success') }}
 </div>
 @endif
-<p class="stamp__user_name">{{ Auth::user()->name }}さんお疲れ様です！</p>
+<p class="show__user_name">{{ Auth::user()->name }}さんお疲れ様です！</p>
 <div id="clock" class="clock">現在日時</div>
 <script src="/js/updateTime.js"></script>
 
-<h2>勤怠打刻</h2>
 <div class="stamp__btn">
     <form class="start__form" action="{{ route('work.start') }}" method="POST">
         @csrf

@@ -4,13 +4,10 @@
 <link rel="stylesheet" href="{{ asset('css/auth/login.css')}}">
 @endsection
 
-@section('link')
-<a class="header__link" href="/register">register</a>
-@endsection
 
 @section('content')
 <div class="login-form">
-    <h2 class="login-form__heading content__heading">Login</h2>
+    <h2 class="login-form__heading">ログイン</h2>
     <div class="login-form__inner">
         <form class="login-form__form" action="/login" method="post">
             @csrf
@@ -32,8 +29,15 @@
                     @enderror
                 </p>
             </div>
-            <input class="login-form__btn btn" type="submit" value="ログイン">
+            <input class="login-form__btn" type="submit" value="  ログイン  ">
+            <div class="register__btn">
+                <div>アカウントをお持ちでない方はこちらから</div>
+                <div>
+                    <a href="/register">会員登録</a>
+                </div>
+            </div>
         </form>
     </div>
+    
 </div>
 @endsection('content')

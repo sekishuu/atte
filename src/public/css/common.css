@@ -6,6 +6,12 @@
     height: 5vw;
 }
 
+.header__heading {
+    font-family: "Concert One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3vw;
+}
 .header__right {
     display: flex;
     list-style: none;
@@ -15,15 +21,14 @@
     margin-left: 2vw;
     font-size: 1vw;
     font-weight: bold;
-    color: gray;
 }
 
 .content {
-    background: rgb(248, 240, 236);
+    background: rgb(240, 234, 234);
     padding: 4vh 4vw;
 }
 
-.stamp__user_name{
+.show__user_name{
     display: flex;
     justify-content: center;
     font-size: 1.2vw;
@@ -68,13 +73,82 @@
 .footer {
     display: flex;
     justify-content: center;
+    font-size: 1vw;
     font-weight: bold;
     margin: 1vw 0;
+}
+
+.atte__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1vw;
+}
+.table__th {
+    border-top: 1.7px solid gray;
+    padding: 1vw 0;
+}
+.table__td {
+    border-top: 1.7px solid gray;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1vw 0;
+}
+
+.date__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 4vw 0 17vw;
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+
+.select__date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1vw 0;
+}
+.submit__btn {
+    font-size:1vw;
+}
+
+.select__date__btn{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border-radius: 1vw;
+}
+
+.select__date__btn>a{
+    background: rgb(243, 243, 243);
+    font-size: 0.9vw;
+    color: rgb(62, 162, 224);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0 0.7vw;
+    margin-left:-1px;
+    border: 1px solid gray;
+}
+
+.yesterday__btn{
+    border-top-left-radius: 0.5vw;
+    border-bottom-left-radius: 0.5vw;
+}
+
+.tomorrow__btn {
+    border-top-right-radius: 0.5vw;
+    border-bottom-right-radius: 0.5vw;
 }
 
 
 
 
+
+
+.pagination__position{
+    text-align: center;
+}
 
 .pagination {
     display: inline-block;

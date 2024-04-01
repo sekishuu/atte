@@ -1,6 +1,10 @@
 .content {
     background-color: #F1ECE7;
 }
+.register-form__heading {
+    display: flex;
+    justify-content: center;
+}
 
 .register-form__inner {
     display: flex;
@@ -9,7 +13,7 @@
 }
 
 .register-form__form {
-    padding: 64px 96px;
+    padding: 3vw 6vw;
     width: 40vw;
     border: 1px solid #C5B9B0;
     border-radius: 8px;
@@ -46,6 +50,25 @@
     color: #FF9494;
 }
 
+.register-form__btn__place {
+    display: flex;
+    justify-content: center;
+}
 .register-form__btn {
-    margin: 60px auto 0;
+    background: lightblue;
+    color: rgb(226, 142, 121);
+    font-size: 1.1vw;
+    font-weight: bold;
+    padding: 0.1vw 5vw;
+    text-align: center;
+    border-radius: 0.7vw;
+    border: solid 1px lightgray;
+}
+
+.login__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1vw;
+    margin-top: 2vw;
 }

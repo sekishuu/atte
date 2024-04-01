@@ -4,13 +4,9 @@
 <link rel="stylesheet" href="{{ asset('css/auth/register.css')}}">
 @endsection
 
-@section('link')
-<a class="header__link" href="/login">login</a>
-@endsection
-
 @section('content')
 <div class="register-form">
-    <h2 class="register-form__heading content__heading">Register</h2>
+    <h2 class="register-form__heading">会員登録</h2>
     <div class="register-form__inner">
         <form class="register-form__form" action="/register" method="post">
             @csrf
@@ -45,7 +41,15 @@
                 <label class="register-form__label" for="password_confirmation">パスワード確認</label>
                 <input class="register-form__input" type="password" name="password_confirmation" id="password_confirmation" placeholder="パスワードを再入力してください">
             </div>
-            <input class="register-form__btn btn" type="submit" value="登録">
+            <div class="register-form__btn__place">
+                <input class="register-form__btn" type="submit" value="登録">
+            </div>
+            <div class="login__btn">
+                <div>アカウントをお持ちの方はこちらから</div>
+                <div>
+                    <a href="/login">ログイン</a>
+                </div>
+            </div>
         </form>
     </div>
 </div>

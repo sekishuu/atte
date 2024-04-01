@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
     <link rel="stylesheet" href="{{ asset('css/common.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
     @yield('css')
 </head>
 
@@ -18,8 +21,12 @@
                 <a href="/" style="text-decoration: none; color: inherit;">Atte</a>
             </h1>
             <ul class="header__right">
-                <li class="header__right__menu">ホーム</li>
-                <li class="header__right__menu">日付一覧</li>
+                <li class="header__right__menu">
+                    <a href="/" style="text-decoration: none; color: inherit;">ホーム</a>
+                </li>
+                <li class="header__right__menu">
+                    <a href="/attendance" style="text-decoration: none; color: inherit;">日付一覧</a>
+                </li>
                 <li class="header__right__menu">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
