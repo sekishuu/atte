@@ -3,14 +3,14 @@
 @section('content')
 <p class="show__user_name">こんにちは、{{ Auth::user()->name }}さん【管理者画面】</p>
 <div class="select__date">
-    <form class="date__form" action="{{ route('attendances.index') }}" method="GET">
+    <form class="date__form" action="{{ route('admin.index') }}" method="GET">
         <input type="date" name="date" value="{{ $selectedDate }}">
         <button class="submit__btn" type="submit">表示</button>
     </form>
     <div class="select__date__btn">
-        <a class="yesterday__btn" href="{{ route('attendances.index', ['date' => \Carbon\Carbon::parse($selectedDate)->subDay()->format('Y-m-d')]) }}">&lsaquo; 前日</a>
-        <a href="{{ route('attendances.index', ['date' => \Carbon\Carbon::now()->format('Y-m-d')]) }}">今日</a>
-        <a class="tomorrow__btn" href="{{ route('attendances.index', ['date' => \Carbon\Carbon::parse($selectedDate)->addDay()->format('Y-m-d')]) }}">翌日 &rsaquo;</a>
+        <a class="yesterday__btn" href="{{ route('admin.index', ['date' => \Carbon\Carbon::parse($selectedDate)->subDay()->format('Y-m-d')]) }}">&lsaquo; 前日</a>
+        <a href="{{ route('admin.index', ['date' => \Carbon\Carbon::now()->format('Y-m-d')]) }}">今日</a>
+        <a class="tomorrow__btn" href="{{ route('admin.index', ['date' => \Carbon\Carbon::parse($selectedDate)->addDay()->format('Y-m-d')]) }}">翌日 &rsaquo;</a>
     </div>
 </div>
 

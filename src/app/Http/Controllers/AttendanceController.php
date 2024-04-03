@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Attendance;
 use App\Models\BreakTime;
 use Illuminate\Support\Facades\Auth;
@@ -57,18 +58,22 @@ class AttendanceController extends Controller
      public function endWork(Request $request)
      {
           $attendance = Attendance::where('user_id', Auth::id())
-               // ->whereNull('end_time')
-               // ->latest()
-               // ->first();
-
-          ->whereDate('work_date', now()->toDateString())
+               ->whereDate('work_date', now()->toDateString())
                ->latest('start_time')
                ->first();
+
+          $isAdmin = Auth::user()->admin;
 
           if ($attendance) {
                $attendance->update(['end_time' => now()]);
                $request->session()->forget('work_started', 'break_started');
-               return redirect('/attendance')->with('success', '勤務終了を記録しました。');
+
+               if ($isAdmin){
+                    return redirect('/admin/index')->with('success', '勤務終了を記録しました。');
+               } else {
+                    return redirect('/attendance')->with('success', '勤務終了を記録しました。');
+               }
+
           } else {
                return redirect('/attendance')->with('error', '勤務開始記録が見つかりません。');
           }

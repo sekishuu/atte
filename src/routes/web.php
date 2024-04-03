@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/work/end', [AttendanceController::class, 'endWork'])->name('work.end');
     Route::post('/break/start', [AttendanceController::class, 'startBreak'])->name('break.start');
     Route::post('/break/end', [AttendanceController::class, 'endBreak'])->name('break.end');
+});
+
+Route::middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/users', [AdminController::class, 'usersList'])->name('admin.usersList');
 });

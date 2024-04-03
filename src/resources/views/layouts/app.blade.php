@@ -25,8 +25,17 @@
                     <a href="/" style="text-decoration: none; color: inherit;">ホーム</a>
                 </li>
                 <li class="header__right__menu">
+                    @if(Auth::check())
+                    <a href="{{ auth()->user()->admin ? '/admin/index' : '/attendance' }}" style="text-decoration: none; color: inherit;">日付一覧</a>
+                    @else
                     <a href="/attendance" style="text-decoration: none; color: inherit;">日付一覧</a>
+                    @endif
                 </li>
+                @if(Auth::check() && auth()->user()->admin)
+                <li class="header__right__menu">
+                    <a href="/admin/users" style="text-decoration: none; color: inherit;">ユーザー一覧</a>
+                </li>
+                @endif
                 <li class="header__right__menu">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
