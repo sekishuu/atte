@@ -56,6 +56,26 @@ class Attendance extends Model
     return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
     }
 
+    public function getWorkSecondsAttribute()
+    {
+        if (!$this->end_time) {
+            return 0;
+        }
+
+        $start = Carbon::parse($this->start_time);
+        $end = Carbon::parse($this->end_time);
+
+        $totalBreakSeconds = $this->breakTimes->sum(function ($break) {
+            return Carbon::parse($break->end_time)->diffInSeconds(Carbon::parse($break->start_time));
+        });
+
+        $workSeconds = $end->diffInSeconds($start) - $totalBreakSeconds;
+
+
+        return $workSeconds;
+    }
+
+
     public function getFormattedTotalBreakTimeAttribute()
     {
         $totalBreakSeconds = $this->breakTimes->sum(function ($break) {

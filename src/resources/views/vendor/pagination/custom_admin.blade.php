@@ -4,7 +4,7 @@
         {{-- "Previous Page" Link --}}
         <li class="{{ $paginator->onFirstPage() ? 'disabled' : '' }}">
             @if ($paginator->currentPage() > 1)
-            <a href="{{ $paginator->previousPageUrl() }}{{ strpos($paginator->previousPageUrl(), '?') === false ? '?' : '&' }}date={{ request('date') }}" rel="prev">&lsaquo;</a>
+            <a href="{{ $paginator->previousPageUrl() }}{{ strpos($paginator->previousPageUrl(), '?') === false ? '?' : '&' }}month={{ request('month') }}" rel="prev">&lsaquo;</a>
             @else
             <span>&lsaquo;</span>
             @endif
@@ -20,7 +20,7 @@
             @if (is_array($element))
                 @foreach ($element as $page => $url)
                     <li class="{{ $page == $paginator->currentPage() ? 'active' : '' }}">
-                        <a href="{{ $url }}{{ strpos($url, '?') === false ? '?' : '&' }}date={{ request('date') }}">{{ $page }}</a>
+                        <a href="{{ $url }}{{ strpos($url, '?') === false ? '?' : '&' }}month={{ request('month') }}">{{ $page }}</a>
                     </li>
                 @endforeach
             @endif
@@ -28,7 +28,7 @@
 
         {{-- "Next Page" Link --}}
         <li class="{{ $paginator->hasMorePages() ? '' : 'disabled' }}">
-            <a href="{{ $paginator->nextPageUrl() }}{{ strpos($paginator->nextPageUrl(), '?') === false ? '?' : '&' }}date={{ request('date') }}" rel="next">&rsaquo;</a>
+            <a href="{{ $paginator->nextPageUrl() }}{{ strpos($paginator->nextPageUrl(), '?') === false ? '?' : '&' }}month={{ request('month') }}" rel="next">&rsaquo;</a>
         </li>
     </ul>
 </nav>

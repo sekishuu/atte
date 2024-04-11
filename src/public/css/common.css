@@ -82,6 +82,7 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 1vw;
+    table-layout: fixed;
 }
 .table__th {
     border-top: 1.7px solid gray;
@@ -93,24 +94,60 @@
     vertical-align: middle;
     padding: 1vw 0;
 }
-
 .date__form {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 4vw 0 17vw;
+    flex-direction: column;
     font-size: 1.5vw;
     font-weight: bold;
+    margin-left: 4vw;
 }
-
+.choose__user__form {
+    font-size: 1vw;
+}
+.choose__user {
+    display: flex;
+}
+.choose__user__list {
+    background: rgb(243, 243, 243);
+    border: 1px solid gray;
+}
+.select__user__btn {
+    margin-left: 0.5vw;
+    font-weight: bold;
+}
+.total__working__time__form {
+    font-size: 1.2vw;
+    font-weight: bold;
+    padding-right: 1vw;
+}
 .select__date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1vw 0;
+}
+.select__date__index {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 1vw 0;
 }
+
+.show__date{
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+
 .submit__btn {
+    background: rgb(243, 243, 243);
     font-size:1vw;
+    color: rgb(14, 39, 54);
+    font-weight: bold;
+    padding: 0 0.5vw;
+    border: 1px solid gray;
+    border-radius: 1vw;
 }
 
 .select__date__btn{
@@ -126,7 +163,7 @@
     color: rgb(62, 162, 224);
     font-weight: bold;
     text-decoration: none;
-    padding: 0 0.7vw;
+    padding: 0 2vw;
     margin-left:-1px;
     border: 1px solid gray;
 }

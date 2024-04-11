@@ -30,18 +30,6 @@ class AttendanceController extends Controller
           return view('index', compact('attendances', 'selectedDate'));
      }
 
-     public function showByDate($date)
-     {
-          $userId = Auth::id();
-          $date = Carbon::parse($date)->format('Y-m-d');
-          $attendances = Attendance::with(['breakTimes'])
-               ->where('user_id', $userId)
-               ->whereDate('work_date', $date)
-               ->get();
-
-          return view('index', compact('attendances', 'date'));
-     }
-
      public function startWork(Request $request)
      {
           Attendance::create([
@@ -83,8 +71,6 @@ class AttendanceController extends Controller
      public function startBreak(Request $request)
      {
           $attendanceId = Attendance::where('user_id', Auth::id())
-                    // ->latest()
-                    // ->first();
 
           ->whereDate('work_date', now()->toDateString())
                ->latest('start_time')

@@ -12,14 +12,35 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        $selectedDate = $request->date ? Carbon::parse($request->date)->format('Y-m-d') : Carbon::now()->format('Y-m-d');
+        $selectedMonth = $request->month ? Carbon::parse($request->month)->format('Y-m') : Carbon::now()->format('Y-m');
+        $startOfMonth = Carbon::parse($selectedMonth)->startOfMonth();
+        $endOfMonth = Carbon::parse($selectedMonth)->endOfMonth();
+        $userId = $request->user_id;
 
-        $attendances = Attendance::with(['breakTimes'])
-            ->whereDate('work_date', '=', $selectedDate)
+        $allAttendancesQuery = Attendance::with(['breakTimes', 'user'])
+            ->when($userId, function ($query, $userId) {
+                $query->where('user_id', $userId);
+            })
+            ->whereBetween('work_date', [$startOfMonth, $endOfMonth]);
+
+
+        $totalWorkSeconds = $allAttendancesQuery->get()->reduce(function ($carry, $attendance) {
+            return $carry + $attendance->work_seconds;
+        }, 0);
+
+        $hours = floor($totalWorkSeconds / 3600);
+        $minutes = floor(($totalWorkSeconds % 3600) / 60);
+        $seconds = $totalWorkSeconds % 60;
+        $totalWorkTime = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+
+        $attendances = $allAttendancesQuery->orderBy('work_date', 'desc')
+            ->orderBy('work_date', 'desc')
             ->orderBy('start_time', 'desc')
             ->paginate(5);
 
-        return view('admin', compact('attendances', 'selectedDate'));
+            $users = User::all();
+
+        return view('admin', compact('attendances','selectedMonth','users','userId','totalWorkTime'));
     }
 
     public function usersList()
